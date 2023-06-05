@@ -1,0 +1,140 @@
+1)
+CREATE TABLE EMPLOYEE
+(
+EmpNo number(10) NOT NULL PRIMARY KEY,
+EmpName varchar(20) NOT NULL,
+Gender varchar(5) NOT NULL,
+Salary number(7) NOT NULL,
+Address varchar(20) NOT NULL,
+DNo number(10),
+check(Gender in('M','F'))
+);
+
+2)
+
+CREATE TABLE DEPARTMENT
+(
+DeptNo number(10) NOT NULL PRIMARY KEY,
+DeptName varchar(20) UNIQUE,
+Location varchar(20)
+);
+
+3)
+Alter table EMPLOYEE add FOREIGN KEY(DNo) REFERENCES Department(DeptNo);
+
+4)
+insert into Department values(23,'Computer Science','AB5');
+insert into Department values(24,'Environment Science','AB4');
+insert into Department values(25,'Material Science','AB3');
+insert into Department values(26,'Terrestrial Science','AB2');
+
+insert into Employee values(1,'Avin','M',300000,'Manipal',23);
+insert into Employee values(2,'Pavan','M',300000,'Hyderbad',23);
+insert into Employee values(3,'Sharon','F',257000,'Kerela',24);
+insert into Employee values(4,'Upendra','F',195000,'Manipal',25);
+
+
+5)
+insert into Employee values(1,'Avin','M','Manipal',23);
+insert into Employee values(4,'Upendra','T',195000,'Manipal',25);
+
+6)
+
+Update Employee set Gender='B';
+
+7)
+
+Alter Table Employee modify foreign key(DNo) references Department(DeptNo) on delete cascade;
+
+8)
+
+Alter table Employee modify salary default 10000;
+
+insert into Employee values(4,'Upendra','F',DEFAULT,'Manipal',25);
+
+Alter table Employee add constraint y salary default 10000;
+
+
+9)
+Select name,dept_name from Student;
+
+NAME                 DEPT_NAME
+-------------------- --------------------
+Zhang                Comp. Sci.
+Shankar              Comp. Sci.
+Brandt               History
+Chavez               Finance
+Peltier              Physics
+Levy                 Physics
+Williams             Comp. Sci.
+Sanchez              Music
+Snow                 Physics
+Brown                Comp. Sci.
+Aoi                  Elec. Eng.
+
+NAME                 DEPT_NAME
+-------------------- --------------------
+Bourikas             Elec. Eng.
+Tanaka               Biology
+
+10)
+select name from Instructor
+where dept_name='Comp. Sci.';
+
+
+NAME
+--------------------
+Srinivasan
+Katz
+Brandt
+
+11)
+
+ select title,credits from Course where credits=3 and dept_name='Comp. Sci.';
+
+TITLE                                                 CREDITS
+-------------------------------------------------- ----------
+Robotics                                                    3
+Image Processing                                            3
+Database System Concepts                                    3
+
+12)
+
+Select Course_id,title from Course where exists(Select ID from Student where ID='12345');
+
+COURSE_I TITLE
+-------- --------------------------------------------------
+BIO-101  Intro. to Biology
+BIO-301  Genetics
+BIO-399  Computational Biology
+CS-101   Intro. to Computer Science
+CS-190   Game Design
+CS-315   Robotics
+CS-319   Image Processing
+CS-347   Database System Concepts
+EE-181   Intro. to Digital Systems
+FIN-201  Investment Banking
+HIS-351  World History
+
+COURSE_I TITLE
+-------- --------------------------------------------------
+MU-199   Music Video Production
+PHY-101  Physical Principles
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

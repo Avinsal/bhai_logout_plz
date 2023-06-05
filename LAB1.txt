@@ -1,0 +1,88 @@
+1)Create Table Employee with attributes(Emp_No,Emp_Name,Address).
+
+CREATE TABLE EMPLOYEE
+(
+Emp_No number(10),
+Emp_Name varchar(20),
+Address varchar(20)
+);
+
+
+2)Insert Five Employee Information
+
+insert into EMPLOYEE values(1,'Avin','Manipal');
+insert into EMPLOYEE values(2,'Sharon','Udupi');
+insert into EMPLOYEE values(3,'Pavan','Hyderbad');
+insert into EMPLOYEE values(4,'Kautham','Qatar');
+insert into EMPLOYEE values(5,'Ambar','Manipal');
+insert into Employee values(6,'Upendra','Manglore');
+
+3)
+
+SELECT EMP_NAME FROM Employee;
+    EMP_NAME             
+ -------------------- 
+     Avin                
+     Sharon               
+     Pavan               
+     Kautham              
+     Ambar                
+     Upendra
+
+
+ 4)
+
+Select * from Emplyee where Address='MANIPAL';
+
+    EMP_NO EMP_NAME             ADDRESS
+---------- -------------------- --------------------
+         1 Avin                 Manipal
+         5 Ambar                Manipal
+
+5)
+
+ Alter table EMPLOYEE add(Salary number(10));
+
+6)
+
+ Select * from Employee;
+
+   EMP_NO EMP_NAME             ADDRESS                  SALARY
+---------- -------------------- -------------------- ----------
+         1 Avin                 Manipal                  300000
+         2 Sharon               Udupi                    300000
+         3 Pavan                Hyderbad                 300000
+         4 Kautham              Qatar                    300000
+         5 Ambar                Manipal                  300000
+         6 Upendra              Manglore                 300000
+7)
+
+ Describe Employee;
+
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                             NUMBER(10)
+ EMP_NAME                                           VARCHAR2(20)
+ ADDRESS                                            VARCHAR2(20)
+ SALARY                                             NUMBER(10)
+
+8)
+
+delete from Employee where Address='Manglore';
+
+    EMP_NO EMP_NAME             ADDRESS                  SALARY
+---------- -------------------- -------------------- ----------
+         1 Avin                 Manipal                  300000
+         2 Sharon               Udupi                    300000
+         3 Pavan                Hyderbad                 300000
+         4 Kautham              Qatar                    300000
+         5 Ambar                Manipal                  300000
+
+9)
+
+ Rename Employee to Employee1;
+
+10)
+
+drop table Employee1;

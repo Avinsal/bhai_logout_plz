@@ -1,0 +1,59 @@
+1)
+
+Select course_id from Section where Semester='Fall' and year=2009
+  UNION Select course_id from Section where Semester='Spring' and year=2010; 
+
+COURSE_I
+--------
+CS-101
+CS-315
+CS-319
+CS-347
+FIN-201
+HIS-351
+MU-199
+PHY-101
+
+2)
+
+Select course_id from Section where Semester='Fall' and year=2009
+  INTERSECT Select course_id from Section where Semester='Spring' and year=2010;
+
+COURSE_I
+--------
+CS-101
+
+3)
+
+Select course_id from Section where Semester='Fall' and year=2009
+  minus Select course_id from Section where Semester='Spring' and year=2010;
+
+COURSE_I
+--------
+CS-347
+PHY-101
+
+4)
+
+Select title from course minus select c.title from course c, takes t where t.course_id=c.course_id;
+
+TITLE
+--------------------------------------------------
+Computational Biology
+
+
+5)
+Select c.title,c.course_id from Course c where c.course_id IN(Select course_id from Section where Semester='Fall' and year=2009) and c.course_id IN(Select course_id
+from Section where Semester='Spring' and year=2010);
+
+TITLE                                              COURSE_I
+-------------------------------------------------- --------
+Intro. to Computer Science                         CS-101
+
+6) 
+Select count(ID) from takes where course_id in(Select course_id from teaches where ID=10101);
+
+ COUNT(ID)
+----------
+        11
+

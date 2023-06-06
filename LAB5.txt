@@ -1,0 +1,87 @@
+1)
+
+Select Bdate,Address from Employee where fname='John' and Minit='B' and Lname='Smith';
+
+BDATE     ADDRESS
+--------- ------------------------------
+09-JAN-65 731 Fondren, Houston, TX
+
+
+select Fname,Minit,lname,address from Employee inner join Department ON Employee.Dno=Department.dnumber where dname='Research';
+
+FNAME           M LNAME           ADDRESS
+--------------- - --------------- ------------------------------
+John            B Smith           731 Fondren, Houston, TX
+Franklin        T Wong            638 Voss, Houston, TX
+Ramesh          K Narayan         975 Fire Oak, Humble, TX
+Joyce           A English         5631 Rice, Houston, TX
+
+2)
+
+Select pnumber,Dnum,Lname,Bdate,address from Employee inner join Department ON Department.Mgr_ssn=Employee.ssn inner join Project ON Project.Dnum=Department.Dnumber where plocation='Stafford';
+
+   PNUMBER       DNUM LNAME           BDATE     ADDRESS
+---------- ---------- --------------- --------- ------------------------------
+        10          4 Wallace         20-JUN-41 291 Berry, Bellaire, TX
+        10          4 Borg            10-NOV-37 450 Stone, Houston, TX
+
+3)
+
+Select DISTINCT Salary from Employee;
+
+    SALARY
+----------
+     55000
+     37000
+     38000
+     30000
+     40000
+     43000
+     25000
+4)
+
+ Select e.Fname,e.Lname,s.Fname as SuperFname,s.Lname as SuperLname from Employee e,Employee s where s.Super_ssn=e.ssn;
+
+FNAME           LNAME           SUPERFNAME      SUPERLNAME
+--------------- --------------- --------------- ---------------
+Richard         Marini          Richard         Marini
+Franklin        Wong            John            Smith
+James           Borg            Franklin        Wong
+Jennifer        Wallace         Alicia          Zelaya
+James           Borg            Jennifer        Wallace
+Franklin        Wong            Ramesh          Narayan
+Franklin        Wong            Joyce           English
+Jennifer        Wallace         Ahmad           Jabbar
+
+
+5)
+
+Select pnumber from Works_on inner join Employee ON Essn=ssn inner join Project ON pnumber=Pno where Lname='Smith';
+
+6)
+
+Select Fname,Lname from Employee where address like '%Houston%';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

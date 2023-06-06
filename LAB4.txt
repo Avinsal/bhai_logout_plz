@@ -1,0 +1,215 @@
+1)
+Select course_id,count(ID) Sudents from takes group by course_id;
+
+COURSE_I    SUDENTS
+-------- ----------
+FIN-201           1
+CS-190            2
+MU-199            1
+CS-101            7
+HIS-351           1
+CS-319            2
+CS-347            2
+PHY-101           1
+EE-181            1
+CS-315            2
+BIO-101           1
+
+COURSE_I    SUDENTS
+-------- ----------
+BIO-301           1
+
+2)
+Select dept_name,count(ID) s from Student group by dept_name having count(ID)>10;
+
+3)
+Select count(course_id),dept_name from course group by dept_name;
+
+COUNT(COURSE_ID) DEPT_NAME
+---------------- --------------------
+               5 Comp. Sci.
+               3 Biology
+               1 History
+               1 Elec. Eng.
+               1 Finance
+               1 Music
+               1 Physics
+
+4)
+
+Select name,avg(salary),dept_name from Instructor group by dept_name,name having avg(salary)>42000;
+
+NAME                 AVG(SALARY) DEPT_NAME
+-------------------- ----------- --------------------
+Einstein                   95000 Physics
+Crick                      72000 Biology
+Wu                         90000 Finance
+Califieri                  62000 History
+Brandt                     92000 Comp. Sci.
+Kim                        80000 Elec. Eng.
+Gold                       87000 Physics
+Katz                       75000 Comp. Sci.
+Srinivasan                 65000 Comp. Sci.
+El Said                    60000 History
+Singh                      80000 Finance
+
+5)
+
+Select sec_id,count(ID) from Takes where year=2009 and semester='Spring' group by sec_id;
+
+SEC_ID    COUNT(ID)
+-------- ----------
+2                 2
+1                 1
+
+6)
+
+Select * from prereq order by course_id asc;
+
+COURSE_I PREREQ_I
+-------- --------
+BIO-301  BIO-101
+BIO-399  BIO-101
+CS-190   CS-101
+CS-315   CS-101
+CS-319   CS-101
+CS-347   CS-101
+EE-181   PHY-101
+
+7)
+Select * from Instructor order by salary desc;
+
+ID    NAME                 DEPT_NAME                SALARY
+----- -------------------- -------------------- ----------
+22222 Einstein             Physics                   95000
+83821 Brandt               Comp. Sci.                92000
+12121 Wu                   Finance                   90000
+33456 Gold                 Physics                   87000
+98345 Kim                  Elec. Eng.                80000
+76543 Singh                Finance                   80000
+45565 Katz                 Comp. Sci.                75000
+76766 Crick                Biology                   72000
+10101 Srinivasan           Comp. Sci.                65000
+58583 Califieri            History                   62000
+32343 El Said              History                   60000
+
+ID    NAME                 DEPT_NAME                SALARY
+----- -------------------- -------------------- ----------
+15151 Mozart               Music                     40000
+
+8)
+
+ Select max(salary),dept_name from Instructor group by dept_name;
+
+MAX(SALARY) DEPT_NAME
+----------- --------------------
+      92000 Comp. Sci.
+      72000 Biology
+      62000 History
+      90000 Finance
+      80000 Elec. Eng.
+      40000 Music
+      95000 Physics
+9)
+Select avg(salary),dept_name from Instructor group by dept_name having avg(salary)>42000;
+
+AVG(SALARY) DEPT_NAME
+----------- --------------------
+ 77333.3333 Comp. Sci.
+      72000 Biology
+      61000 History
+      85000 Finance
+      80000 Elec. Eng.
+      91000 Physics
+
+10)
+
+ Select sec_id,count(ID) from Takes where year=2010 and semester='Spring' group by sec_id having count(ID)=(Select max(c) from (Select count(ID) c from takes  where year=2010 and semester='Spring' group by sec_id));
+
+SEC_ID    COUNT(ID)
+-------- ----------
+1                 7
+
+11)
+
+ Select name from Instructor where ID IN(Select ID from teaches where course_id I
+N(Select course_id from Course where dept_name='Comp. Sci.'));
+
+NAME
+--------------------
+Srinivasan
+Katz
+Brandt
+
+12)
+
+ Select avg(salary),dept_name,Count(ID) from Instructor group by dept_name having avg(salary)>50000 and Count(ID)=(Select Count(ID) from Instructor group by dept_name having Count(ID)>5);
+
+13)
+with m(budget) as (Select max(budget) from department)
+Select d.dept_name,d.budget from Department d,m where d.budget=m.budget;
+
+DEPT_NAME                BUDGET
+-------------------- ----------
+Finance                  120000
+
+14)
+
+ with total(sal) as (Select avg(salary) from (Select sum(salary) salary from Instructor group by dept_name))
+ Select dept_name,Sum(salary) totalsalary From instructor group by dept_name having sum(salary)>(Select sal from total);
+
+DEPT_NAME            TOTALSALARY
+-------------------- -----------
+Comp. Sci.                232000
+Finance                   170000
+Physics                   182000t sal from total);
+
+15)
+
+ with en_count(sec_id,encount) as (select sec_id,count(ID) enrol from section natural join takes where semester='Fall' and year=2009 group by sec_id) select sec_id,max(encount) from en_count group by sec_id;
+
+SEC_ID   MAX(ENCOUNT)
+-------- ------------
+1                   9
+
+16)
+with Fin_TotCred(totcred) as (select tot_cred from student where dept_name='Finance') select dept_name,sum(tot_cred) from student,Fin_TotCred group by dept_name having sum(tot_cred)>max(totcred);
+
+
+DEPT_NAME            SUM(TOT_CRED)
+-------------------- -------------
+Elec. Eng.                     158
+Comp. Sci.                     246
+Biology                        120
+
+17)
+
+delete from instructor where dept_name = 'Finance';
+
+18)
+
+delete from course where dept_name='Comp. Sci.';
+
+19)
+
+update student set dept_name ='IT' where dept_name = 'Comp. Sci';
+
+20)
+
+update instructor set salary=
+case
+when salary<=100000 then salary*1.05
+else salary*1.03
+end
+
+
+21)
+
+insert into student select ID,name,dept_name,0 from instructor;
+
+
+22)
+
+
+delete from instructor where salary < (select avg(salary) from instructor);
+

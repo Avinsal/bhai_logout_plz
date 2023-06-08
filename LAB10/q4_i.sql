@@ -1,0 +1,4 @@
+BEGIN
+    disp('&deptName');
+END;
+/
